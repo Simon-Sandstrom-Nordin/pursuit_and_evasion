@@ -19,7 +19,7 @@ pursuit_crystal = 0;
 iterations_ahead = 3;
 
 No_of_games = 1000;  % ger ungefär 1 % fluct
-results_matrix = zeros(No_of_games+4, 1); % 1p vs 3e
+results_matrix = zeros(No_of_games+4, 1); % 1p vs 2e
 
 % constant parameters
 No_of_evaders = 2;  % välj kontrollvärde                      
@@ -27,9 +27,9 @@ No_of_pursuers = 1; % välj kontrollvärde
 
 % booleans
 visualization_boolean = false;
-sighting_target_boolean = true;
+sighting_target_boolean = false;
 increment_boolean = false;
-smart_target_boolean = false;
+smart_target_boolean = true;
 
 % nya tester för increment of iter_ahead
 % n_vec = [0];
@@ -105,6 +105,6 @@ for density = density_vec
 
     results_matrix(:, column_to_be_adjusted) = [iterations_until_completion_matrix, percentage, mean_var, pursuer_death_counter, evader_wall_deaths_counter]';
     column_to_be_adjusted = column_to_be_adjusted + 1;
-    name = "sighting_target_10000_"+num2str(density)+".csv";
+    name = "smart_target_10000_"+num2str(density)+".csv";
     writematrix(results_matrix, name)
 end
