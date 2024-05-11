@@ -29,7 +29,7 @@ crystaltp = 6;
 pursuit_crystal = 0;
 iterations_ahead = 3;
 
-No_of_games = 1000;  % ger ungefär 1 % fluct
+No_of_games = 2500;  % ger ungefär 1 % fluct
 results_matrix = zeros(No_of_games+4, 1); % 1p vs 3e
 
 % evaders kör rakt in i väggar
@@ -91,7 +91,7 @@ evader_wall_deaths_matrix = zeros(1, No_of_games);
 % increment_scale_factor = 1;
 % increment_decay_rate = 1;
 
-jesus_scale_factor_list = [9, 10, 20];
+jesus_scale_factor_list = [0]; % [.1, 1, 2]; % 3, 4, 5, 6, 7, 10, 20];
 
 increment = .3; %  [.001, .01, .1, 1.5, .2, .25 .3, .4, .45, .6];
 increment_scale_factor = 1; % [.25, .5, 1, 4, 8, 12, 20, 40, 60, 100];
@@ -171,7 +171,7 @@ for jesus_scale_factor = jesus_scale_factor_list
     column_to_be_adjusted = column_to_be_adjusted + 1;
     %name = "basemodel" + num2str(incrementation_value) + "_200.csv";
     %writematrix(results_matrix,name)
-    name = "increment_testing_" + num2str(jesus_scale_factor) + "_newest.csv";
+    name = "increment_10000_4.csv";
     writematrix(results_matrix, name)
     
     % name = "tp_crystal_" + num2str(crystaltp) + "_200.csv";
