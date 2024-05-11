@@ -18,7 +18,7 @@ crystaltp = 6;
 pursuit_crystal = 0;
 iterations_ahead = 3;
 
-No_of_games = 2;  % ger ungefär 1 % fluct
+No_of_games = 1000;  % ger ungefär 1 % fluct
 results_matrix = zeros(No_of_games+4, 1); % 1p vs 3e
 
 % constant parameters
