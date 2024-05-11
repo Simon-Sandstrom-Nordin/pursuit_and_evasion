@@ -27,7 +27,7 @@ No_of_pursuers = 1; % välj kontrollvärde
 
 % booleans
 visualization_boolean = false;
-sighting_target_boolean = false;
+sighting_target_boolean = true;
 increment_boolean = false;
 smart_target_boolean = false;
 
@@ -105,6 +105,6 @@ for density = density_vec
 
     results_matrix(:, column_to_be_adjusted) = [iterations_until_completion_matrix, percentage, mean_var, pursuer_death_counter, evader_wall_deaths_counter]';
     column_to_be_adjusted = column_to_be_adjusted + 1;
-    name = "increment_10000_"+num2str(density)+".csv";
+    name = "sighting_target_10000_"+num2str(density)+".csv";
     writematrix(results_matrix, name)
 end
