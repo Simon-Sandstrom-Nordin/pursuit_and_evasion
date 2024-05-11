@@ -1,4 +1,4 @@
-function [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate, jesus_scale_factor)  
+function [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate)  
      
     tp_list = [];
 
@@ -285,10 +285,6 @@ function [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M,
         if ~isempty(cells)
             for cell = 1:length(cells(:, 1))
                 distance = 0;
-
-                if agents(agent).color == 1 && ~agents(agent).bresenham && fieldmap(cells(cell, 1), cells(cell, 2)) ~= 1
-                    distance = jesus_scale_factor*norm([agents(agent).x - cells(cell, 1)/N_matrix; agents(agent).y - cells(cell, 2)/N_matrix]);
-                end
 
                 if agents(agent).bresenham
                     for pursuer = 1:length(agents(agent).px_list)

@@ -1,6 +1,6 @@
 function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, evader_wall_deaths] = ...
     game_program(No_of_evaders, No_of_pursuers, obstacle_density, visualization_boolean, ...
-    sighting_target_boolean, jesus_boolean, smart_target_boolean, iterations_ahead, increment_boolean, increment, M, game, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate, jesus_scale_factor)
+    sighting_target_boolean, jesus_boolean, smart_target_boolean, iterations_ahead, increment_boolean, increment, M, game, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate)
     
     % disp("not testing")
 
@@ -274,7 +274,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
 % disp('----------------');
 % disp(crystal_tp_ahead);
 
-            [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate, jesus_scale_factor);
+            [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate);
 
             % Calculate the angle between the agent's current heading and the direction to the target
             targetAngle = atan2(agents(agent).ty - agents(agent).y, agents(agent).tx - agents(agent).x);
