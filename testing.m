@@ -12,7 +12,8 @@ col_indices = 2:N_matrix-1;
 ones_only(row_indices, col_indices) = M;
 %M = 3*ones_only;
 
-density_vec = 0:.1:0.9;
+density_vec = 0:.1:0.2;
+
 max_iter = 22;
 crystaltp = 6;
 pursuit_crystal = 0;
@@ -27,9 +28,9 @@ No_of_pursuers = 1; % välj kontrollvärde
 
 % booleans
 visualization_boolean = false;
-sighting_target_boolean = false;
-increment_boolean = false;
-smart_target_boolean = true;
+sighting_target_boolean = true;
+increment_boolean = true;
+smart_target_boolean = false;
 
 % nya tester för increment of iter_ahead
 % n_vec = [0];
@@ -105,6 +106,6 @@ for density = density_vec
 
     results_matrix(:, column_to_be_adjusted) = [iterations_until_completion_matrix, percentage, mean_var, pursuer_death_counter, evader_wall_deaths_counter]';
     column_to_be_adjusted = column_to_be_adjusted + 1;
-    name = "smart_target_10000_"+num2str(density)+".csv";
+    name = "sighting_increment_10000_"+num2str(density)+".csv";
     writematrix(results_matrix, name)
 end

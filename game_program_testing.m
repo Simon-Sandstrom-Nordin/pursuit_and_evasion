@@ -4,8 +4,8 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
     
     disp("not testing")
 
-    %initial_matrix = readmatrix('initial_matrix.csv');
-    % frames = {0}; % Initialize an empty array to store frames
+    % initial_matrix = readmatrix('initial_matrix.csv');
+    frames = {0}; % Initialize an empty array to store frames
     
     % Playing field matrix
     N_matrix = 302; % spikad
@@ -36,7 +36,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
     % M_a = M == 1;
     % M = ones(N_matrix);
     % M = M - M_a;
-    % 
+
     base_M = M;
 
     color_M = zeros(N_matrix);
@@ -118,6 +118,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
         agents(agent).ax = 0; % Placeholder value for linear acceleration
         agents(agent).ay = 0; % Placeholder value for linear acceleration in y-direction
         % agents(agent).theta = rand(1)*2*pi;
+
         agents(agent).theta = initial_matrix(3, agent);
         agents(agent).omega = 0; % Placeholder value for angular velocity
         agents(agent).alpha = 0; % Placeholder value for angular acceleration
@@ -147,7 +148,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
     
     % Simulation parameters
     h = 0.005; % Step length
-    n = 5000000; % Number of iterations
+    n = 500; % Number of iterations
     %n = 1000000;
     kill_radius = .0075; % spikad-ish
 
@@ -561,18 +562,18 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
                 % Update Matrix index
                 x_index = ceil(agents(agent).tx * N_matrix);
                 y_index = ceil(agents(agent).ty * N_matrix);
-
-                % Check if indices are within bounds
-                if all(x_index-1 > 0) && all(x_index+1 <= N_matrix) && all(y_index-1 > 0) && all(y_index+1 <= N_matrix)
-                    color_M(x_index, y_index) = 4; % Use color to represent agents
-                end
-
-                if agents(agent).color == 1 && ~isempty(agents(agent).px)
-                    % disp([ceil(N_matrix*agents(agent).px)', ceil(N_matrix*agents(agent).py)'])
-                    for p = 1:length(agents(agent).px)
-                        color_M(ceil(agents(agent).px(p) * N_matrix), ceil(agents(agent).py(p) * N_matrix)) = 1;
-                    end
-                end
+                % 
+                % % Check if indices are within bounds
+                % if all(x_index-1 > 0) && all(x_index+1 <= N_matrix) && all(y_index-1 > 0) && all(y_index+1 <= N_matrix)
+                %     color_M(x_index, y_index) = 4; % Use color to represent agents
+                % end
+                % 
+                % if agents(agent).color == 1 && ~isempty(agents(agent).px)
+                %     % disp([ceil(N_matrix*agents(agent).px)', ceil(N_matrix*agents(agent).py)'])
+                %     for p = 1:length(agents(agent).px)
+                %         color_M(ceil(agents(agent).px(p) * N_matrix), ceil(agents(agent).py(p) * N_matrix)) = 1;
+                %     end
+                % end
                 % place predicted
                 % M(agents(agent).x0_pred, agents(agent).y0_pred) = 3;
                 % % place predicted list
@@ -594,14 +595,15 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
             % Display the playing field matrix
             exp_walls = agents(end).exploration_map >= 1;
             exp_walls = 3*exp_walls;
-            imagesc(exp_walls + color_M);
+            imagesc(M + color_M);
             % M = base_M;
-            colormap([1 1 1; 1 0 0; 0 0 1; 0 0 0; 1 0 1]); % White for empty, Red for red, Blue for blue, Black for wall, pink for target point
+            colormap([1 1 1; 1 0 0; 0 0 1; 0 0 0]); % White for empty, Red for red, Blue for blue, Black for wall, pink for target point
 
             % Counter for remaining blue agents
             remaining_blue_agents = sum([agents.color] == 2);
             % Construct the title string
-            title_str = ["Current crystal tp iter ahead is " + num2str(crystal_tp_ahead) + ", Current density is " + num2str(obstacle_density) + "." + " Iteration no. " + num2str(K)];
+            title_str = [""];
+            % title_str = ["Current crystal tp iter ahead is " + num2str(crystal_tp_ahead) + ", Current density is " + num2str(obstacle_density) + "." + " Iteration no. " + num2str(K)];
             
             % Set the figure title with the constructed string
             title(title_str, 'HorizontalAlignment', 'center');
@@ -610,12 +612,12 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
 
             % remove target points and predicted
             for agent = 1:length(agents)
-
-                if agents(agent).color == 1 && ~isempty(agents(agent).px)
-                    for p = 1:length(agents(agent).px)
-                        color_M(ceil(agents(agent).px(p)*N_matrix), ceil(agents(agent).py(p)*N_matrix)) = 0;
-                    end
-                end
+                % 
+                % if agents(agent).color == 1 && ~isempty(agents(agent).px)
+                %     for p = 1:length(agents(agent).px)
+                %         color_M(ceil(agents(agent).px(p)*N_matrix), ceil(agents(agent).py(p)*N_matrix)) = 0;
+                %     end
+                % end
                 % M(agents(agent).x0_pred, agents(agent).y0_pred) = 0;
 
                 % remove predicted list
@@ -631,10 +633,10 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
                 x_index = ceil(agents(agent).tx * N_matrix);
                 y_index = ceil(agents(agent).ty * N_matrix);
     
-                % Check if indices are within bounds
-                if any(x_index > 0) && any(x_index <= N_matrix) && any(y_index > 0) && any(y_index <= N_matrix)
-                    color_M(x_index, y_index) = 0; % Use color to represent agents
-                end
+                % % Check if indices are within bounds
+                % if any(x_index > 0) && any(x_index <= N_matrix) && any(y_index > 0) && any(y_index <= N_matrix)
+                %     color_M(x_index, y_index) = 0; % Use color to represent agents
+                % end
             end
         end
         
@@ -648,7 +650,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
             reason_for_exit = "All evaders are dead";
             writematrix(initial_matrix, "initial_matrix.csv")
             writematrix(initial_M, "initial_m.csv")
-            return;
+            break;
         end
         % 
         % % break if all pursuers are dead
@@ -656,7 +658,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
             reason_for_exit = "All pursuers are dead";
             writematrix(initial_matrix, "initial_matrix.csv")
             writematrix(initial_M, "initial_m.csv")
-            return;
+            break;
         end
 
         % if agents(agent).color == 1
@@ -679,30 +681,31 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
             %     disp(agents(agent).px_list)
             % end
         end
-        % 
-    	% frame = getframe(gcf);
-        % frames{K} = frame;
-        % 
+
+    	frame = getframe(gcf);
+        frames{K} = frame;
+
     end
 
     % writematrix(initial_matrix, "initial_matrix.csv")
     % writematrix(initial_M, "initial_m.csv")
 
-    % % Create a VideoWriter object
-    % writerObj = VideoWriter('testing.avi');
-    % writerObj.FrameRate = 30; % Adjust frame rate as needed
-    % open(writerObj);
-    % 
-    % % % Write frames to the video file
-    % for i = 1:length(frames)
-    %     % Convert frame data to uint8
-    %     frame_data = im2uint8(frames{i}.cdata);
-    %     writeVideo(writerObj, frame_data);
-    % end
-    % 
-    % % % Close the VideoWriter object
-    % close(writerObj);
-     writematrix(initial_matrix, "initial_matrix.csv")
-     writematrix(initial_M, "initial_m.csv")
+    % Create a VideoWriter object
+    writerObj = VideoWriter('testing_increment_true.avi');
+    writerObj.FrameRate = 30; % Adjust frame rate as needed
+    open(writerObj);
+
+    % % Write frames to the video file
+    for i = 1:length(frames)
+        % Convert frame data to uint8
+        frame_data = im2uint8(frames{i}.cdata);
+        writeVideo(writerObj, frame_data);
+    end
+
+    % % Close the VideoWriter object
+    close(writerObj);
+
+    writematrix(initial_matrix, "initial_matrix.csv")
+    writematrix(initial_M, "initial_m.csv")
 
 end

@@ -52,7 +52,7 @@ No_of_pursuers = 1; % välj kontrollvärde
 visualization_boolean = true;
 sighting_target_boolean = false;
 % sighting + increment
-increment_boolean = false;
+increment_boolean = true;
 
 %kolla korrekta incrementations värdet 
 %incrementation_values = 0.1:0.1:1;

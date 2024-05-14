@@ -325,7 +325,7 @@ function [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M,
         agents(agent).exploration_map(start_x:end_x, start_y:end_y) = fieldmap(start_x:end_x, start_y:end_y);
         
         % disp("partially erase explotation map")
-        [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate, jesus_scale_factor);
+        [agents, M] = set_target_points(agents, max_radie, x_index, y_index, M, agent, increment, max_pot, N_matrix, fieldmap, kill_radius, sighting_target_boolean, jesus_boolean, smart_target_boolean, h, iterations_ahead, increment_boolean, factor_reach_max_angular_velocity, max_angular_velocity, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate);
         return
     end 
 

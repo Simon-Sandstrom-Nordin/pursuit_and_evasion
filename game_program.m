@@ -345,7 +345,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
             % disp(agents(agent).px)
             if open_area
                 [crash_flag, agents] = iter_ahead_function(3, v + h*max_acceleration, agents(agent).x + h*v*cos(agents(agent).theta), agents(agent).y + h*v*sin(agents(agent).theta), max_iter, crystal_tp_ahead, agents(agent).tx, agents(agent).ty, agents, agent, max_angular_velocity, factor_reach_max_angular_velocity, h, kill_radius, fieldmap);
-                if sighting_target_boolean && ~agents(agent).bresenham && agents(agent).color == 1 && ~isempty(agents(agent).px) && norm([agents(agent).tx - agents(agent).x, agents(agent).ty - agents(agent).y]) < norm([agents(agent).x_list(end-crystal_tp_ahead) - agents(agent).x, agents(agent).y_list(end - crystal_tp_ahead) - agents(agent).y]) && agents(agent).color == 1
+                if sighting_target_boolean && ~agents(agent).bresenham && agents(agent).color == 1 && ~isempty(agents(agent).px) && norm([agents(agent).tx - agents(agent).x, agents(agent).ty - agents(agent).y]) < norm([agents(agent).x_list(end-crystal_tp_ahead) - agents(agent).x, agents(agent).y_list(end - crystal_tp_ahead) - agents(agent).y])
                     v = v + h*max_deacceleration;
                 else 
                     if ~crash_flag
