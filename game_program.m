@@ -1,7 +1,8 @@
 function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, evader_wall_deaths] = ...
     game_program(No_of_evaders, No_of_pursuers, obstacle_density, visualization_boolean, ...
-    sighting_target_boolean, jesus_boolean, smart_target_boolean, iterations_ahead, increment_boolean, increment, M, game, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate)
+    sighting_target_boolean, jesus_boolean, smart_target_boolean, iterations_ahead, increment_boolean, increment, max_iter, crystal_tp_ahead, pursuit_crystal, increment_scale_factor, increment_decay_rate, number_of_games)
     
+    rng(number_of_games)
     % disp("not testing")
 
     % initial_matrix = readmatrix('initial_matrix.csv');
@@ -44,7 +45,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
     fieldmap = getFieldmap(M_new, iterationer);
    
     if visualization_boolean
-        figure('WindowState','maximized');
+        figure(); % 'WindowState','maximized'
     end
     
     % Randomly initialize agents

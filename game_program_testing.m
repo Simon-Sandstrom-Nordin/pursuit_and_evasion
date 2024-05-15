@@ -148,7 +148,7 @@ function [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, eva
     
     % Simulation parameters
     h = 0.005; % Step length
-    n = 500; % Number of iterations
+    n = 1000; % Number of iterations
     %n = 1000000;
     kill_radius = .0075; % spikad-ish
 

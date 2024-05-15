@@ -12,7 +12,7 @@ col_indices = 2:N_matrix-1;
 ones_only(row_indices, col_indices) = M;
 %M = 3*ones_only;
 
-density_vec = 0.3:.1:0.5;
+density_vec = 0:.1:.9;
 
 max_iter = 22;
 crystaltp = 6;
@@ -28,7 +28,7 @@ No_of_pursuers = 1; % välj kontrollvärde
 
 % booleans
 visualization_boolean = false;
-sighting_target_boolean = true;
+sighting_target_boolean = false;
 increment_boolean = true;
 smart_target_boolean = false;
 
@@ -65,9 +65,10 @@ for density = density_vec
     iterations_until_completion_matrix = [];
     for game = 1:No_of_games
         disp("Current game is no. " + num2str(game) + " so far " + num2str(win_counter) + " completed, or fractionally " + num2str(win_counter/game))
-        
+        rng(game)
+
         [iterations_until_completion, reason_for_exit, pursuer_wall_deaths, evader_wall_deaths] = game_program(No_of_evaders, No_of_pursuers, density, visualization_boolean, ...
-    sighting_target_boolean, true, smart_target_boolean, iterations_ahead, increment_boolean, increment, M, game, max_iter, crystaltp, pursuit_crystal, increment_scale_factor, increment_decay_rate);
+    sighting_target_boolean, true, smart_target_boolean, iterations_ahead, increment_boolean, increment, max_iter, crystaltp, pursuit_crystal, increment_scale_factor, increment_decay_rate, game);
         evader_wall_deaths_counter = evader_wall_deaths_counter + evader_wall_deaths;
         if (reason_for_exit == "All pursuers are dead")
             %break
@@ -106,6 +107,6 @@ for density = density_vec
 
     results_matrix(:, column_to_be_adjusted) = [iterations_until_completion_matrix, percentage, mean_var, pursuer_death_counter, evader_wall_deaths_counter]';
     column_to_be_adjusted = column_to_be_adjusted + 1;
-    name = "sighting_increment_10000_"+num2str(density)+".csv";
+    name = "same_rng_1000_i_"+num2str(density)+".csv";
     writematrix(results_matrix, name)
 end
